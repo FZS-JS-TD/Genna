@@ -7,5 +7,6 @@ namespace Genna.Level
 {
     class Level
     {
+
     }
 }
