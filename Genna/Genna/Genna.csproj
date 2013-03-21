@@ -59,6 +59,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Genna.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -77,9 +80,14 @@
     <Compile Include="GameObjects\Characters\NPC\NPC.cs" />
     <Compile Include="GameObjects\Characters\Players\Player.cs" />
     <Compile Include="GameObjects\Characters\Players\Zanaj_Akari\Zanaj.cs" />
+    <Compile Include="GameObjects\Chests\Chest.cs" />
+    <Compile Include="GameObjects\Chests\RandomChest\RandomChest.cs" />
+    <Compile Include="GameObjects\Chests\SpecialChest\SpecialChest.cs" />
     <Compile Include="GameObjects\Enemies\Enemy.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Level\Level.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
