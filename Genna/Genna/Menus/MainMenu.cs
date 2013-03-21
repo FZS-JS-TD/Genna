@@ -190,6 +190,11 @@ namespace Genna.Menus
                     _menuImage = menuImages[3];
                 }
             }
+
+            if (PressedOnlyOnce(Keys.Escape))
+            {
+                game.Exit();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
