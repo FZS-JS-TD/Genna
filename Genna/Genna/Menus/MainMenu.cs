@@ -84,6 +84,7 @@ namespace Genna.Menus
                 MediaPlayer.IsRepeating = true;
             }
 
+            #region If Enter is Pressed
             if (PressedOnlyOnce(Keys.Enter))
             {
                 if (_menuMode == MenuMode.Default)
@@ -111,7 +112,9 @@ namespace Genna.Menus
                     game.Exit();
                 }
             }
+            #endregion
 
+            #region Up Scrolling
             else if (PressedOnlyOnce(Keys.S) || PressedOnlyOnce(Keys.Down) || PressedOnlyOnce(Keys.D) || PressedOnlyOnce(Keys.Right))
             {
                 if (_menuMode == MenuMode.Default)
@@ -151,7 +154,9 @@ namespace Genna.Menus
                     gearTurn.Play();
                 }
             }
+#endregion
 
+            #region Down Scrolling
             else if (PressedOnlyOnce(Keys.W) || PressedOnlyOnce(Keys.Up) || PressedOnlyOnce(Keys.A) || PressedOnlyOnce(Keys.Left))
             {
                 if (_menuMode == MenuMode.Default)
@@ -190,6 +195,7 @@ namespace Genna.Menus
                     _menuImage = menuImages[3];
                 }
             }
+            #endregion
 
             if (PressedOnlyOnce(Keys.Escape))
             {
