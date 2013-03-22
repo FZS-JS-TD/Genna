@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -8,6 +9,10 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+
+// Built in Requirements
+using Genna.Menus;
+using Genna.Levels;
 
 namespace Genna
 {
@@ -17,12 +22,42 @@ namespace Genna
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;   
+        SpriteBatch spriteBatch;
+
+        public GameMode gameMode;
+        public MainMenu menu;
+
+        public bool PlayerLoaded;
+
+        public enum GameMode
+        {
+            Menu,
+            Playing,
+            Paused
+            //TO BE ADDED LATER AS NEEDED
+        }
+
+        public GameMode _GameMode
+        {
+            get
+            {
+                return gameMode;
+            }
+            set
+            {
+                gameMode = value;
+            }
+        }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferMultiSampling = false;
+            graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -34,7 +69,8 @@ namespace Genna
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            menu = new MainMenu(this);
+            gameMode = GameMode.Menu;
             base.Initialize();
         }
 
@@ -47,6 +83,7 @@ namespace Genna
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            menu.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -70,6 +107,11 @@ namespace Genna
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (gameMode == GameMode.Menu)
+            {
+                menu.Update(gameTime);
+            }
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -81,9 +123,15 @@ namespace Genna
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            if (gameMode == GameMode.Menu)
+            {
+                spriteBatch.Begin();
+                menu.Draw(spriteBatch);
+                spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

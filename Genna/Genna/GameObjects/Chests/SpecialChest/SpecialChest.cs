@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Genna.Level
+namespace Genna.GameObjects.Chests.SpecialChest
 {
-    class Level
+    class SpecialChest
     {
-
     }
 }
