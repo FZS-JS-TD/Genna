@@ -29,6 +29,9 @@ namespace Genna
 
         public bool PlayerLoaded;
 
+        KeyboardState keyState;
+        KeyboardState prevKeyState;
+
         public enum GameMode
         {
             Menu,
@@ -96,6 +99,18 @@ namespace Genna
             // TODO: Unload any non ContentManager content here
         }
 
+        private bool PressedOnlyOnce(Keys key)
+        {
+            if (prevKeyState.IsKeyUp(key) && keyState.IsKeyDown(key))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -104,7 +119,9 @@ namespace Genna
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            keyState = Keyboard.GetState();
+            
+            if (PressedOnlyOnce(Keys.Escape)||GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
             if (gameMode == GameMode.Menu)
@@ -113,6 +130,7 @@ namespace Genna
             }
 
             // TODO: Add your update logic here
+            prevKeyState = keyState;
 
             base.Update(gameTime);
         }

@@ -57,7 +57,7 @@ namespace Genna.Menus
             
             _menuImage = menuImages[5];
 
-            titleTheme = content.Load<Song>(@"Sounds/Music/Genna_Theme_v1.1");
+            titleTheme = content.Load<Song>(@"Sounds/Music/Genna's Gleam");
         }
 
         private bool PressedOnlyOnce(Keys key)
@@ -98,6 +98,7 @@ namespace Genna.Menus
                 else if (_menuMode == MenuMode.NewGame)
                 {
                     game._GameMode = Game1.GameMode.Playing;
+                    this.SoundOff();
                 }
                 else if (_menuMode == MenuMode.LoadGame)
                 {
@@ -196,11 +197,12 @@ namespace Genna.Menus
                 }
             }
             #endregion
+        }
 
-            if (PressedOnlyOnce(Keys.Escape))
-            {
-                game.Exit();
-            }
+        public void SoundOff()
+        {
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Stop();
         }
 
         public void Draw(SpriteBatch spriteBatch)

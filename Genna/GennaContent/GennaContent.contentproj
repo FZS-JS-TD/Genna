@@ -111,9 +111,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Music\Genna_Theme_v1.1.mp3">
-      <Name>Genna_Theme_v1.1</Name>
-      <Importer>Mp3Importer</Importer>
+    <Compile Include="Sounds\Music\Genna%27s Gleam.wma">
+      <Name>Genna%27s Gleam</Name>
+      <Importer>WmaImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
