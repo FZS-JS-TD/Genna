@@ -31,7 +31,7 @@ namespace Genna.Items.Armors
             plusSpeed = pPlusSpeed;
         }
 
-        public void CheckEquipped()
+        public void AddStats()
         {
             if (equipped == true)
             {
