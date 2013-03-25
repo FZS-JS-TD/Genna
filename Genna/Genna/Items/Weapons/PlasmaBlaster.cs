@@ -13,10 +13,18 @@ using Genna.GameObjects.Characters;
 using Genna.GameObjects.Characters.Players;
 using Genna.GameObjects.Characters.Players.Zanaj_Akari;
 
-namespace Genna.GameObjects.Chests.SpecialChest
+namespace Genna.Items.Weapons
 {
-    class SpecialChest : Chest
+    class PlasmaBlaster : Weapon
     {
+        public PlasmaBlaster(int pTier, int pType, string pId, Zanaj pZan, 
+            int pWeaponType, int pDamage, int pFireRate, int pSpreadBullets, int pBulletSize, int pBulletSpeed) 
+            : base(pTier, pType, pId, pZan,pWeaponType,pDamage,pFireRate,pSpreadBullets,pBulletSize,pBulletSpeed)
+        {
+        }
 
+        public void CheckEquipped()
+        {
+        }
     }
 }
