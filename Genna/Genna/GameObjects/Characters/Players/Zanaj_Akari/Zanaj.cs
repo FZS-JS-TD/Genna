@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ using Genna.Items.Weapons;
 
 namespace Genna.GameObjects.Characters.Players.Zanaj_Akari
 {
-    class Zanaj : Player
+    class Zanaj : Players.Player
     {
         protected int speed;
         protected int luck;
