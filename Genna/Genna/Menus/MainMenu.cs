@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+using Genna.GameObjects.Characters.Players.Zanaj_Akari;
+
 namespace Genna.Menus
 {
     public class MainMenu
@@ -19,9 +21,12 @@ namespace Genna.Menus
         Texture2D _menuImage;
         KeyboardState prevKeyState;
         KeyboardState keyState;
-        Song titleTheme;
-        bool songStart = false;
         SoundEffect gearTurn;
+        Texture2D settings;
+        ParticleTimer timer;
+        
+        List<Particle> particles;
+        Texture2D particleImg;
 
         private List<Texture2D> menuImages;
 
@@ -42,6 +47,29 @@ namespace Genna.Menus
             _menuMode = MenuMode.Default;
             menuImages = new List<Texture2D>();
             game = sentGame;
+            timer = new ParticleTimer();
+
+            // TODO: Add your initialization logic here
+            particles = new List<Particle>();
+
+            Random rand = new Random();
+
+            int i = 0;
+            while (i < 750)
+            {
+                int xSpd = rand.Next(11) - 3;
+                int ySpd = rand.Next(11) - 3;
+
+                int dimensions = 96 + rand.Next(97);
+
+                Particle p = new Particle(xSpd, ySpd, sentGame);
+                p.Rect = new Rectangle(rand.Next(sentGame.GraphicsDevice.Viewport.Width), rand.Next(sentGame.GraphicsDevice.Viewport.Height), dimensions, dimensions);
+
+                p.Color = new Color(18 + rand.Next(10), 3 + rand.Next(5), 25 + rand.Next(20));
+
+                particles.Add(p);
+                i++;
+            }
         }
 
         public void LoadContent(ContentManager content)
@@ -53,11 +81,14 @@ namespace Genna.Menus
             menuImages.Add(content.Load<Texture2D>("Main_Menu/MenuStates/quit"));
             menuImages.Add(content.Load<Texture2D>("Main_Menu/MenuStates/default"));
 
+            settings = content.Load<Texture2D>("Main_Menu/SettingsMenu");
+
             gearTurn = content.Load<SoundEffect>("Sounds/SFX/gearRotate");
             
             _menuImage = menuImages[5];
 
-            titleTheme = content.Load<Song>(@"Sounds/Music/Genna's Gleam");
+            particleImg = game.Content.Load<Texture2D>("Main_Menu/particle");
+            // TODO: use this.Content to load your game content here
         }
 
         private bool PressedOnlyOnce(Keys key)
@@ -77,11 +108,16 @@ namespace Genna.Menus
             prevKeyState = keyState;
             keyState = Keyboard.GetState();
 
-            if (!songStart)
+            foreach (Particle p in particles)
             {
-                MediaPlayer.Play(titleTheme);
-                songStart = true;
-                MediaPlayer.IsRepeating = true;
+                p.Move();
+                p.Screenwrap(game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+            }
+            // TODO: Add your update logic here
+
+            if (PressedOnlyOnce(Keys.Escape))
+            {
+                game.music.Stop();
             }
 
             #region If Enter is Pressed
@@ -89,29 +125,49 @@ namespace Genna.Menus
             {
                 if (_menuMode == MenuMode.Default)
                 {
+                    game.music.Stop();
                     //MakeErrorrySound
                 }
                 else if (_menuMode == MenuMode.Continue)
                 {
-                    //Not Yet Implemented
+                    game.music.Stop();
+                    game._GameMode = Game1.GameMode.Playing;
+                    game.CurrentLevel = game.gennaTown;
+                        
                 }
                 else if (_menuMode == MenuMode.NewGame)
                 {
-                    game._GameMode = Game1.GameMode.Playing;
-                    this.SoundOff();
+                    game.music.Stop();
+                    Zanaj.isDead = false;
+                    Zanaj.instance = new Zanaj(game, 0, 0);
+                    Game1.zanaj = Zanaj.getInstance();
+                    List<Items.Item> itemList = new List<Items.Item>();
+                    game.Initialize(1);
+                    game.CurrentLevel = game.gennaTown;
+                    Game1.gameMode = Game1.GameMode.Playing;
+                    Zanaj.getInstance().Health = (new Zanaj()).Health;
+                    Zanaj.getInstance()._inventory.MoneyAmount = 100;
+
+                    foreach (Items.Item item in itemList)
+                        Zanaj.getInstance()._inventory.AddItem(item);
                 }
                 else if (_menuMode == MenuMode.LoadGame)
                 {
-                    //Not Yet Implemented
+                    game.music.Stop();
+
+                    Zanaj.isDead = false;
+                    Zanaj.fileHand.Load(game, 1);
                 }
                 else if (_menuMode == MenuMode.Settings)
                 {
-                    //Not Yet Implemented
+                    game._GameMode = Game1.GameMode.Settings;
                 }
                 else if (_menuMode == MenuMode.Quit)
                 {
                     game.Exit();
                 }
+
+                game.music.SetSong();
             }
             #endregion
 
@@ -155,7 +211,7 @@ namespace Genna.Menus
                     gearTurn.Play();
                 }
             }
-#endregion
+            #endregion
 
             #region Down Scrolling
             else if (PressedOnlyOnce(Keys.W) || PressedOnlyOnce(Keys.Up) || PressedOnlyOnce(Keys.A) || PressedOnlyOnce(Keys.Left))
@@ -199,15 +255,46 @@ namespace Genna.Menus
             #endregion
         }
 
-        public void SoundOff()
-        {
-            MediaPlayer.IsRepeating = false;
-            MediaPlayer.Stop();
-        }
-
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (timer.time > 10000)
+            {
+                particles = new List<Particle>();
+
+                Random rand = new Random();
+
+                int i = 0;
+                while (i < 750)
+                {
+                    int xSpd = rand.Next(11) - 3;
+                    int ySpd = rand.Next(11) - 3;
+
+                    int dimensions = 96 + rand.Next(97);
+
+                    Particle p = new Particle(xSpd, ySpd, game);
+                    p.Rect = new Rectangle(rand.Next(game.GraphicsDevice.Viewport.Width), rand.Next(game.GraphicsDevice.Viewport.Height), dimensions, dimensions);
+
+                    p.Color = new Color(18 + rand.Next(10), 3 + rand.Next(5), 25 + rand.Next(20));
+
+                    particles.Add(p);
+                    i++;
+                }
+            }
+
+            timer.Update();
+
             spriteBatch.Draw(_menuImage, new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height) , Color.White);
+
+            spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
+
+            foreach (Particle p in particles)
+            {
+                spriteBatch.Draw(particleImg, p.Rect, p.Color/*new Color(1.0f, 0.5f, 0.25f)*/);
+            }
+
+
         }
     }
 }

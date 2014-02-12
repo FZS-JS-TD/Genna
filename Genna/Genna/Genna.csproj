@@ -75,24 +75,72 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObject.cs" />
+    <Compile Include="Camera\Camera2D.cs" />
+    <Compile Include="FadeHandler.cs" />
+    <Compile Include="GameObjects\Characters\NPC\Villager.cs" />
+    <Compile Include="GameObjects\TextBox\TextBox.cs" />
+    <Compile Include="GameOverScreen.cs" />
+    <Compile Include="Levels\BossLevel.cs" />
+    <Compile Include="LoadSave\FileHandler.cs" />
+    <Compile Include="GameObjects\Bullet.cs" />
     <Compile Include="GameObjects\Characters\Character.cs" />
+    <Compile Include="GameObjects\Characters\NPC\Doctor\Doctor.cs" />
     <Compile Include="GameObjects\Characters\NPC\NPC.cs" />
+    <Compile Include="GameObjects\Characters\NPC\ShopKeeper\ShopKeeper.cs" />
     <Compile Include="GameObjects\Characters\Players\Player.cs" />
     <Compile Include="GameObjects\Characters\Players\Zanaj_Akari\Zanaj.cs" />
     <Compile Include="GameObjects\Chests\Chest.cs" />
     <Compile Include="GameObjects\Chests\RandomChest\RandomChest.cs" />
     <Compile Include="GameObjects\Chests\SpecialChest\SpecialChest.cs" />
+    <Compile Include="GameObjects\Enemies\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemies\Enemy.cs" />
+    <Compile Include="GameObjects\Enemies\Mushinis\Mushini.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\GUI\GUI.cs" />
+    <Compile Include="GameObjects\GUI\UI.cs" />
+    <Compile Include="GameObjects\GUI\TextBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Inventory.cs" />
+    <Compile Include="GameObjects\Puzzles\Gate.cs" />
+    <Compile Include="GameObjects\Puzzles\Levers\Lever.cs" />
+    <Compile Include="GameObjects\Puzzles\Puzzle.cs" />
+    <Compile Include="GameObjects\ShopScreen.cs" />
+    <Compile Include="Items\Armors\Armor.cs" />
+    <Compile Include="Items\Armors\Bootscs.cs" />
+    <Compile Include="Items\Armors\Breastplate.cs" />
+    <Compile Include="Items\Armors\Gloves.cs" />
+    <Compile Include="Items\Coal.cs" />
     <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Moneys\Money.cs" />
+    <Compile Include="Items\RandomItem.cs" />
+    <Compile Include="Items\Weapons\AssaultRifle.cs" />
+    <Compile Include="Items\Weapons\Pistol.cs" />
+    <Compile Include="Items\Weapons\PlasmaBlaster.cs" />
+    <Compile Include="Items\Weapons\Raygun.cs" />
+    <Compile Include="Items\Weapons\RocketLauncher.cs" />
+    <Compile Include="Items\Weapons\Shotgun.cs" />
+    <Compile Include="Items\Weapons\SMG.cs" />
+    <Compile Include="Items\Weapons\SniperRifle.cs" />
+    <Compile Include="Levels\DefaultLevel.cs" />
+    <Compile Include="Levels\InfirmaLevel\InfirmaLevel.cs" />
     <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\MapTransition.cs" />
+    <Compile Include="Levels\Outside\Bridge.cs" />
+    <Compile Include="Levels\Outside\Cave.cs" />
+    <Compile Include="Levels\Tile.cs" />
+    <Compile Include="Levels\Town\GennaTown.cs" />
+    <Compile Include="Levels\Town\Shops\Clinic.cs" />
+    <Compile Include="Levels\Town\Shops\ItemShop.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\SettingsMenu.cs" />
+    <Compile Include="MusicHandler.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="ParticleTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Weapons\Weapon.cs" />
+    <Compile Include="Items\Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -135,7 +183,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="GameObjects\Enemies\Enemy_1\" />
+    <Folder Include="GameObjects\Enemies\Mushini\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
