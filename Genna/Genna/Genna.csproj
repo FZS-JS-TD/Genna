@@ -141,12 +141,19 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Items\Weapons\Weapon.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </Content>
+    <Content Include="obj\x86\Debug\cachefile-{14CF7642-1B35-40DE-B66F-A9692CA7B47B}-targetpath.txt" />
+    <Content Include="obj\x86\Debug\ContentPipeline-{14CF7642-1B35-40DE-B66F-A9692CA7B47B}.xml" />
+    <Content Include="obj\x86\Debug\Genna.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\Genna.exe" />
+    <Content Include="obj\x86\Debug\Genna.pdb" />
+    <Content Include="obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt" />
     <Content Include="Settings.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +191,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\Genna.csprojResolveAssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObjects\Enemies\Enemy_1\" />
     <Folder Include="GameObjects\Enemies\Mushini\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

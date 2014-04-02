@@ -17,6 +17,7 @@ namespace Genna.Menus
 {
     public class MainMenu
     {
+        static Random rand;
         Game1 game;
         Texture2D _menuImage;
         KeyboardState prevKeyState;
@@ -257,28 +258,37 @@ namespace Genna.Menus
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (timer.time > 10000)
+            if (timer.time == 0)
             {
-                particles = new List<Particle>();
+                if (MainMenu.rand == null)
+                    rand = new Random();
 
-                Random rand = new Random();
+                Rectangle display = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
 
-                int i = 0;
-                while (i < 750)
-                {
                     int xSpd = rand.Next(11) - 3;
                     int ySpd = rand.Next(11) - 3;
 
                     int dimensions = 96 + rand.Next(97);
 
                     Particle p = new Particle(xSpd, ySpd, game);
-                    p.Rect = new Rectangle(rand.Next(game.GraphicsDevice.Viewport.Width), rand.Next(game.GraphicsDevice.Viewport.Height), dimensions, dimensions);
+                    p.Rect = new Rectangle(rand.Next(display.Width), rand.Next(display.Height), dimensions, dimensions);
+
+                    if (!p.rect.Intersects(display))
+                    {
+                        if (p.X < 0)
+                            p.X += display.Width;
+                        if (p.X > display.Width)
+                            p.X -= display.Width + p.Width;
+                        if (p.Y < 0)
+                            p.Y += display.Height;
+                        if (p.Y > display.Height)
+                            p.Y -= display.Height + p.Height;
+                    }
 
                     p.Color = new Color(18 + rand.Next(10), 3 + rand.Next(5), 25 + rand.Next(20));
 
                     particles.Add(p);
-                    i++;
-                }
+                    particles.Remove(particles[0]);
             }
 
             timer.Update();
@@ -291,7 +301,8 @@ namespace Genna.Menus
 
             foreach (Particle p in particles)
             {
-                spriteBatch.Draw(particleImg, p.Rect, p.Color/*new Color(1.0f, 0.5f, 0.25f)*/);
+                p.ScreenWrap(game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+                spriteBatch.Draw(particleImg, p.Rect, p.Color);
             }
 
 

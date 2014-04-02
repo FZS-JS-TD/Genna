@@ -1,0 +1,4 @@
+100
+198
+1,1,198,False,Money,
+1,3,34,False,Tough Gloves,3,28

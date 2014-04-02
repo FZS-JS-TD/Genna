@@ -117,6 +117,7 @@ Content\GUI\Save.xnb
 Content\Main_Menu\SettingsMenu.xnb
 Content\Sprites\Enemies\Boss\Boss.xnb
 Content\gos.xnb
+Content\fade.xnb
 Content\Fonts\itemOverload.xnb
 Content\Fonts\itemName.xnb
 Content\SpriteFont1.xnb
